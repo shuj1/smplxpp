@@ -212,7 +212,7 @@ if ( SMPLX_BUILD_VIEWER )
     install(TARGETS viewer DESTINATION bin)
 
     add_executable( amass main_amass.cpp )
-    target_link_libraries( amass meshview ${PROJ_NAME} )
+    target_link_libraries( amass meshview ${PROJ_NAME} stdc++fs)
     set_target_properties( amass PROPERTIES OUTPUT_NAME "smplx-amass" )
     install(TARGETS amass DESTINATION bin)
 
