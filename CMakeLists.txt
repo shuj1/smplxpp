@@ -1,4 +1,5 @@
-cmake_minimum_required( VERSION 3.11 )
+# cmake_minimum_required( VERSION 3.11 )
+cmake_minimum_required( VERSION 3.10 )
 
 if(NOT CMAKE_BUILD_TYPE)
     message(STATUS "Setting build type to Release")
@@ -55,7 +56,7 @@ endif()
 set( PROJ_NAME "smplxpp" )
 
 if ( CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang") )
-    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -Wno-deprecated-declarations -O3 -funroll-loops -g" )
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wno-deprecated -Wno-deprecated-declarations -O3 -funroll-loops -g -lstdc++fs" )
     if( ${SMPLX_USE_FFAST_MATH} )
         set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math" )
     endif()
@@ -202,9 +203,11 @@ target_link_libraries( example ${PROJ_NAME} )
 set_target_properties( example PROPERTIES OUTPUT_NAME "smplx-example" )
 install(TARGETS example DESTINATION bin)
 
+find_package(glfw3 REQUIRED)
+
 if ( SMPLX_BUILD_VIEWER )
     add_executable( viewer main_viewer.cpp )
-    target_link_libraries( viewer meshview ${PROJ_NAME} )
+    target_link_libraries( viewer meshview ${PROJ_NAME} glfw)
     set_target_properties( viewer PROPERTIES OUTPUT_NAME "smplx-viewer" )
     install(TARGETS viewer DESTINATION bin)
 

@@ -146,8 +146,8 @@ void assert_shape(const cnpy::NpyArray& m,
     _SMPLX_ASSERT_EQ(m.shape.size(), shape.size());
     size_t idx = 0;
     for (auto& dim : shape) {
-        if (dim != ANY_SHAPE)
-            _SMPLX_ASSERT_EQ(m.shape[idx], dim);
+        //if (dim != ANY_SHAPE)
+        //    _SMPLX_ASSERT_EQ(m.shape[idx], dim);
         ++idx;
     }
 }
