@@ -42,6 +42,9 @@ class Model {
     // data/models/modelname/MODELNAME_GENDER.npz
     explicit Model(Gender gender = Gender::neutral);
 
+    // NOTE: Added.
+    explicit Model(const std::string& data_file_dir, Gender gender);
+
     // Construct from .npz at path (standard SMPL-X npz format)
     // path: .npz model path, e.g. data/models/smplx/*.npz
     // uv_path: UV map information path, see data/models/smplx/uv.txt for an
@@ -65,6 +68,9 @@ class Model {
     // example gender: records gender of model. For informational purposes only.
     void load(const std::string& path, const std::string& uv_path = "",
               Gender new_gender = Gender::unknown);
+
+    // NOTE: Added.
+    void load(Gender gender, const std::string& data_file_dir);
 
     /*** MODEL MANIPULATION ***/
     // Set model deformations: verts := verts_load + d

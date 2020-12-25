@@ -19,6 +19,12 @@ Model<ModelConfig>::Model(Gender gender) {
     load(gender);
 }
 
+// NOTE: Added.
+template <class ModelConfig>
+Model<ModelConfig>::Model(const std::string& data_file_dir, Gender gender) {
+    load(gender, data_file_dir);
+}
+
 template <class ModelConfig>
 Model<ModelConfig>::Model(const std::string& path, const std::string& uv_path,
                           Gender gender) {
@@ -37,6 +43,14 @@ void Model<ModelConfig>::load(Gender gender) {
     load(util::find_data_file(std::string(ModelConfig::default_path_prefix) +
                               util::gender_to_str(gender) + ".npz"),
          util::find_data_file(ModelConfig::default_uv_path), gender);
+}
+
+// NOTE: Added.
+template <class ModelConfig>
+void Model<ModelConfig>::load(Gender gender, const std::string& data_file_dir) {
+    load(data_file_dir + std::string(ModelConfig::default_path_prefix) + util::gender_to_str(gender) + ".npz",
+         data_file_dir + ModelConfig::default_uv_path, 
+         gender);
 }
 
 template <class ModelConfig>
